@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/movies/65e489af0c367d966440fdcf HTTP/1.1

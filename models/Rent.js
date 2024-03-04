@@ -1,4 +1,7 @@
 const {Schema, model} = require('mongoose');
+const {addDays} = require('date-fns');
+
+const DEFAULT_RENT_DEADLINE = 10;
 
 const rentSchema = new Schema({
     movie: {
@@ -11,10 +14,11 @@ const rentSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: new Date()
     },
     deadline: {
-        type: Date
+        type: Date,
+        default: addDays(new Date(), DEFAULT_RENT_DEADLINE)
     },
     status: {
         type: String,
@@ -23,6 +27,8 @@ const rentSchema = new Schema({
     }
 });
 
+//додаємо унікальність для значень movie + user
+rentSchema.index({movie: 1, user: 1}, {unique: true});
 
 const Rent = model('Rent', rentSchema);
 

@@ -5,6 +5,7 @@ const rentRouter = express.Router();
 
 rentRouter.post('/', RentController.createOne);
 rentRouter.get('/:rentId', RentController.getOne);
+rentRouter.get('/users/:userId', RentController.getAllUserRents);
 rentRouter.put('/:rentId', RentController.update);
 
 

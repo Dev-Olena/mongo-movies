@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/rents/65e5845cd533a4733276c1f6 HTTP/1.1 

@@ -1,38 +1,57 @@
-const {Schema, model} = require('mongoose');
-
-const movieSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    director: String,
-    studio: String,
-    genre: [String],
-    prodactionDate: Date,
-    duration: {
-        type: Number,
-        validate: {
-            validator: (v) => v > 0
-        }
-    },
-    actors: [String],
-    rating: {
-        type: Number,
-        min: [0, 'Rating must be great than 0'],
-        max: [10, 'Rating can not be more than 10']
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Movie extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-});
-
-const Movie = model('Movie', movieSchema);
-
-module.exports = Movie;
-
-// Movie
-// *- name
-// - director
-// - studio
-// - genre: []
-// - prodictionDate
-// - duration - Number, >0
-// - actors: []
-// - rating - Number, 0-10
+  }
+  Movie.init({
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    director: {
+      type: DataTypes.STRING
+    },
+    studio: {
+      type: DataTypes.STRING
+    },
+    genre: {
+      type: DataTypes.TEXT
+    },
+    productionDate: {
+      type: DataTypes.DATEONLY,
+      field: "production_date"
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 1
+      }
+    },
+    actors: {
+      type: DataTypes.TEXT
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 0,
+        max: 10
+      }
+    }
+  }, {
+    sequelize,
+    modelName: 'Movie',
+    tableName: 'movies',
+    underscored: true
+  });
+  return Movie;
+};

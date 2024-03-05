@@ -1,35 +1,34 @@
-const {Schema, model} = require('mongoose');
 const {addDays} = require('date-fns');
 
-const DEFAULT_RENT_DEADLINE = 10;
-
-const rentSchema = new Schema({
-    movie: {
-        type: Schema.Types.ObjectId,
-        ref: 'Movie'
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    createdAt: {
-        type: Date,
-        default: new Date()
-    },
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Rent extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Rent.init({
     deadline: {
-        type: Date,
-        default: addDays(new Date(), DEFAULT_RENT_DEADLINE)
+      type: DataTypes.DATEONLY,
+      defaultValue: addDays(new Date(), 10)
     },
     status: {
-        type: String,
-        enum: ['taken', 'returned', 'failed'],
-        default: 'taken'
+      type: DataTypes.ENUM('taken', 'returned', 'failed'),
+      defaultValue: 'taken'
     }
-});
-
-//додаємо унікальність для значень movie + user
-rentSchema.index({movie: 1, user: 1}, {unique: true});
-
-const Rent = model('Rent', rentSchema);
-
-module.exports = Rent;
+  }, {
+    sequelize,
+    modelName: 'Rent',
+    tableName: 'rents',
+    underscored: true
+  });
+  return Rent;
+};

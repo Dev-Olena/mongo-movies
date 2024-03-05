@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./User');
 const Movie = require('./Movie');
 const Rent = require('./Rent');
-const db = require('../configs/mConfig.json');
+const db = require('../../config/mConfig.json');
 
 const CONFIG = db[process.env.NODE_ENV || "development"];
 

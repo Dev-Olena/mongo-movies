@@ -1,4 +1,4 @@
-const {User} =require('../models');
+const {User} =require('../models/mongoModels');
 
 module.exports.createOne = async (req, res, next) => {
     try {

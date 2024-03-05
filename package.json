@@ -13,6 +13,10 @@
   "dependencies": {
     "date-fns": "^3.3.1",
     "express": "^4.18.3",
-    "mongoose": "^8.2.0"
+    "mongoose": "^8.2.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.1",
+    "sequelize-cli": "^6.6.2"
   }
 }

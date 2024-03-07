@@ -1,0 +1,14 @@
+db;
+
+show collections;
+
+db.users.find();
+
+db.users.insertOne(
+  {
+    firstName: 'Kira',
+    email: 'ghjthd@jsh.kd'
+});
+
+Object. keys (db.users.findOne());
+

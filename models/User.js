@@ -9,18 +9,22 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({Movie, Rent}) {
       // define association here
+      User.belongsToMany(Movie, {
+        through: Rent,
+        foreignKey: 'userId'
+      });
     }
   }
   User.init({
     firstName: {
       type: DataTypes.STRING,
-      field: "first_name"
+      field: 'first_name'
     },
     lastName: {
       type: DataTypes.STRING,
-      field: "last_name"
+      field: 'last_name'
     },
     email: {
       type: DataTypes.STRING,
@@ -36,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     favouriteFilms: {
       type: DataTypes.TEXT,
-      field: "favourite_films:"
+      field: 'favourite_films'
     },
   }, {
     sequelize,

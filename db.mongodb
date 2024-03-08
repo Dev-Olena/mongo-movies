@@ -2,7 +2,7 @@ db;
 
 show collections;
 
-db.users.find();
+db.cats.find();
 
 db.users.insertOne(
   {
